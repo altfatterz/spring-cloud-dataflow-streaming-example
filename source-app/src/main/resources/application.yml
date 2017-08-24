@@ -1,0 +1,15 @@
+spring:
+  integration:
+    poller:
+      fixed-delay: 2000
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: demo
+  application:
+    name: source-app
+
+server:
+  port: 8081
+

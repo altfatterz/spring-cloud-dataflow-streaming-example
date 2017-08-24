@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: sink-app
+
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: demo-processed
+server:
+  port: 8082

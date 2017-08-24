@@ -1,0 +1,14 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: processor-app
+
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: demo-processed
+        input:
+          destination: demo
