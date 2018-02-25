@@ -9,6 +9,10 @@ spring:
     stream:
       bindings:
         output:
+          # if you don't provide the group you get an exclusive, auto-delete queue
+          group: haliho
           destination: demo-processed
         input:
+          # if you don't provide the group you get an exclusive, auto-delete queue
+          group: haliho
           destination: demo

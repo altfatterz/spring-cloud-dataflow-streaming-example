@@ -6,6 +6,9 @@ spring:
     stream:
       bindings:
         output:
+          # if you don't provide the group you get an exclusive, auto-delete queue
+          group: haliho
+          # only the demo exchange is created, no queue and no bindings
           destination: demo
   application:
     name: source-app
@@ -13,3 +16,5 @@ spring:
 server:
   port: 8081
 
+
+# consumer group: which means you can have multiple instances of consumers compete for messages from the same queue

@@ -6,6 +6,10 @@ spring:
     stream:
       bindings:
         input:
+          # if you don't provide the group you get an exclusive, auto-delete queue
+          group: haliho
           destination: demo-processed
+
 server:
   port: 8082
+
