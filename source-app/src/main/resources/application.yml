@@ -8,8 +8,10 @@ spring:
         output:
           # if you don't provide the group you get an exclusive, auto-delete queue
           group: haliho
-          # only the demo exchange is created, no queue and no bindings
           destination: demo
+          producer:
+            # pre-creating durable queues in RabbitMQ
+            required-groups: haliho
   application:
     name: source-app
 
