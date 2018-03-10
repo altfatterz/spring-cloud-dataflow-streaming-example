@@ -1,5 +1,6 @@
 package com.example.processorapp;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.integration.annotation.Transformer;
-import org.springframework.messaging.Message;
 
 @SpringBootApplication
 @EnableBinding(Processor.class)
@@ -21,19 +21,24 @@ public class ProcessorApp {
     }
 
     @Transformer(inputChannel = Processor.INPUT, outputChannel = Processor.OUTPUT)
-    public GreetingMessage transform(Message<GreetingMessage> greetingMessage) {
+    public GreetingResponseMessage transform(GreetingMessage greetingMessage) {
         log.info("received greeting message" + greetingMessage);
-        GreetingMessage response = new GreetingMessage("Hoi");
+        GreetingResponseMessage response = new GreetingResponseMessage(greetingMessage.greeting);
         return response;
     }
 
-    @Getter
+    @Data
     static class GreetingMessage {
-
         private String greeting;
+    }
 
-        public GreetingMessage(String greeting) {
-            this.greeting = greeting;
+    @Getter
+    static class GreetingResponseMessage {
+
+        private String response;
+
+        public GreetingResponseMessage(String response) {
+            this.response = response;
         }
     }
 

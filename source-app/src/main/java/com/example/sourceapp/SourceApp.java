@@ -21,6 +21,10 @@ public class SourceApp {
         return new Greeting("hello world");
     }
 
+    /*
+     * headers: contentType: application/json
+     * Payload: { "greeting":"hello world" }
+     */
     @Getter
     @AllArgsConstructor
     static class Greeting {
