@@ -12,7 +12,13 @@ spring:
           # if you don't provide the group you get an exclusive, auto-delete queue
           group: haliho
           destination: demo-processed
+          content-type: application/json
+          producer:
+            required-groups: haliho
         input:
           # if you don't provide the group you get an exclusive, auto-delete queue
           group: haliho
           destination: demo
+#          content-type: application/json
+
+

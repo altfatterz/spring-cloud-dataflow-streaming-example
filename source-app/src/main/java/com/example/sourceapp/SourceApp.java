@@ -1,12 +1,12 @@
 package com.example.sourceapp;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.integration.annotation.InboundChannelAdapter;
-
-import java.util.Date;
 
 @EnableBinding(Source.class)
 @SpringBootApplication
@@ -17,7 +17,14 @@ public class SourceApp {
     }
 
     @InboundChannelAdapter(value = Source.OUTPUT)
-    public String source() {
-        return new Date().toString();
+    public Greeting source() {
+        return new Greeting("hello world");
     }
+
+    @Data
+    @AllArgsConstructor
+    static class Greeting {
+        String greeting;
+    }
+
 }
