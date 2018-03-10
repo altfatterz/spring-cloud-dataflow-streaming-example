@@ -1,7 +1,7 @@
 package com.example.sourceapp;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -21,7 +21,7 @@ public class SourceApp {
         return new Greeting("hello world");
     }
 
-    @Data
+    @Getter
     @AllArgsConstructor
     static class Greeting {
         String greeting;
