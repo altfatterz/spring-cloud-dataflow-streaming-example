@@ -16,6 +16,9 @@ public class SourceApp {
         SpringApplication.run(SourceApp.class, args);
     }
 
+    /*
+     * poller configured with spring.integration.poller.fixed-delay property (see ChannelBindingAutoConfiguration)
+     */
     @InboundChannelAdapter(value = Source.OUTPUT)
     public Greeting source() {
         return new Greeting("hello world");
