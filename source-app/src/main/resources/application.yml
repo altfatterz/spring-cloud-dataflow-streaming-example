@@ -1,7 +1,7 @@
 spring:
   integration:
     poller:
-      fixed-delay: 2000
+      fixed-delay: 100
   cloud:
     stream:
       bindings:
@@ -18,7 +18,7 @@ spring:
           # and this content type will be used when de-serializing the payload at the consumer side. The originalContentType
           # is the actual contentType of the message which will be updated as contentType to the message after de-serialization
           # at the consumer.
-          content-type: application/json
+          content-type: application/xml
 
   application:
     name: source-app
