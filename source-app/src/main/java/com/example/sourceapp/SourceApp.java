@@ -3,7 +3,6 @@ package com.example.sourceapp;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
@@ -21,6 +20,7 @@ import org.springframework.messaging.converter.AbstractMessageConverter;
 import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.util.MimeType;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -43,7 +43,7 @@ public class SourceApp {
      */
     @InboundChannelAdapter(value = Source.OUTPUT)
     public Greeting source() {
-        return new Greeting("hello world", LocalDateTime.now());
+        return new Greeting("hello world", LocalDateTime.of(2018, 3, 11, 13, 49, 7));
     }
 
     /*
@@ -67,7 +67,7 @@ public class SourceApp {
             JavaTimeModule javaTimeModule = new JavaTimeModule();
             javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ISO_DATE_TIME));
             objectMapper.registerModule(javaTimeModule);
-            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+//            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
             objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CASE);
         }
 
@@ -79,8 +79,8 @@ public class SourceApp {
         @Override
         protected Object convertToInternal(Object payload, MessageHeaders headers, Object conversionHint) {
             try {
-                return objectMapper.writer().withRootName("greeting")
-                        .writeValueAsString(payload).getBytes();
+                return objectMapper.writer().withRootName("greeting").writeValueAsString(payload)
+                        .getBytes(StandardCharsets.UTF_8);
             } catch (JsonProcessingException e) {
                 logger.error(e.getMessage(), e);
                 return null;

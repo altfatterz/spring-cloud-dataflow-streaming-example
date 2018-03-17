@@ -19,6 +19,6 @@ spring:
           # if you don't provide the group you get an exclusive, auto-delete queue
           group: haliho
           destination: demo
-          content-type: application/json
+          content-type: application/xml
 
 

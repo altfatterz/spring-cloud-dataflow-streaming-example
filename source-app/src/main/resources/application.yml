@@ -13,12 +13,14 @@ spring:
           producer:
             # pre-creating durable queues in RabbitMQ
             required-groups: haliho
+#            use-native-encoding: true
           # by default adds the header contentType:	application/x-java-object;type=com.example.sourceapp.SourceApp$Greeting
           # the contentType here reflects the content type used by the corresponding binder during serializing the payload
           # and this content type will be used when de-serializing the payload at the consumer side. The originalContentType
           # is the actual contentType of the message which will be updated as contentType to the message after de-serialization
           # at the consumer.
           content-type: application/xml
+
 
   application:
     name: source-app

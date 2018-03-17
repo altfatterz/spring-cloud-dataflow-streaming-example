@@ -1,6 +1,5 @@
 package com.example.sourceapp;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.cloud.stream.test.binder.MessageCollector;
 import org.springframework.messaging.Message;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.BlockingQueue;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -27,11 +27,12 @@ public class SourceAppTests {
 	private MessageCollector collector;
 
 	@Test
-	@Ignore
 	public void testMessages() {
 		BlockingQueue<Message<?>> messages = this.collector.forChannel(source.output());
 
-		assertThat(messages, receivesPayloadThat(is("{\"greeting\":\"hello world\"}")));
+		String msg = "<greeting><value>hello world</value><datetime>2018-03-11T13:49:07</datetime></greeting>";
+
+		assertThat(messages, receivesPayloadThat(is(msg.getBytes(StandardCharsets.UTF_8))));
 	}
 
 }
